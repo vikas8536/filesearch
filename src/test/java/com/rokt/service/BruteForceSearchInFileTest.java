@@ -1,23 +1,20 @@
 package com.rokt.service;
 
 import com.rokt.helpers.DateTimeHelper;
-import com.rokt.helpers.RequestValidation;
-import com.rokt.model.api.PostRequest;
 import com.rokt.model.internal.SearchRequest;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.IOException;
 
-public class SearchInFileBruteForceTest {
-    SearchInFileBruteForce searchInFileBruteForce;
+public class BruteForceSearchInFileTest {
+    BruteForceSearchInFile bruteForceSearchInFile;
 
     @Before
     public void setUp() throws Exception {
-        searchInFileBruteForce = new SearchInFileBruteForce();
-        SearchInFileBruteForce spy = Mockito.spy(searchInFileBruteForce);
+        bruteForceSearchInFile = new BruteForceSearchInFile();
+        BruteForceSearchInFile spy = Mockito.spy(bruteForceSearchInFile);
     }
 
     @Test
@@ -27,6 +24,6 @@ public class SearchInFileBruteForceTest {
         SearchRequest searchRequest = new SearchRequest("sample1.txt",
                 dateTimeHelper.convert("2004-08-01T13:13:29Z"),
                 dateTimeHelper.convert("2004-09-01T13:13:29Z"));
-        searchInFileBruteForce.searchInFile(searchRequest);
+        bruteForceSearchInFile.searchInFile(searchRequest);
     }
 }

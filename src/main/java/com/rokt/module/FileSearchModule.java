@@ -26,7 +26,7 @@ public class FileSearchModule extends AbstractModule {
 
         bind(ReadFiles.class).toInstance(new LoadFilesFromLocal());
         bind(FileParser.class).toInstance(new SpaceSeparatedFileParser());
-        bind(SearchInFiles.class).toInstance(new SearchInFileBruteForce());
+        bind(SearchInFiles.class).toInstance(new BruteForceSearchInFile());
 
         bind(DateTimeHelper.class).asEagerSingleton();
         bind(RequestValidation.class).asEagerSingleton();

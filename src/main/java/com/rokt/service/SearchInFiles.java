@@ -20,7 +20,7 @@ public abstract class SearchInFiles {
 
     public abstract List<SearchResponse> searchInFile(SearchRequest searchRequest) throws IOException;
 
-    private boolean isInRange(SearchRequest searchRequest, Record a) {
+    protected boolean isInRange(SearchRequest searchRequest, Record a) {
         return !isRecordBeforeSearchRange(searchRequest, a)
                 && !isRecordAfterSearchRange(searchRequest, a);
     }
