@@ -18,8 +18,6 @@ public class FileSearchApplication extends Application<FileSearchConfiguration> 
 
     @Override
     public void run(FileSearchConfiguration fileSearchConfiguration, Environment environment) {
-        /*MetricRegistry registry = environment.metrics();
-        JmxReporter.forRegistry(registry).build().start();*/
 
         FileSearchModule module = new FileSearchModule(fileSearchConfiguration, environment.metrics());
         Injector injector = Guice.createInjector(module);

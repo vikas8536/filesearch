@@ -1,0 +1,43 @@
+maxConcurrency: "500"
+filesLocation: "upload"
+dateTimeFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'"
+server:
+  gzip:
+    bufferSize: 350KB
+    enabled: true
+    minimumEntitySize: 10B
+    includedMethods: ["GET", "POST"]
+  type: default
+  maxThreads: 1200
+  minThreads: 24
+  maxQueuedRequests: 300
+  applicationConnectors:
+    - type: http
+      port: 9090
+      selectorThreads: 6
+      acceptorThreads: 3
+  adminConnectors:
+    - type: http
+      port: 9091
+      selectorThreads: 6
+      acceptorThreads: 3
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: target/access.log
+        archivedLogFilenamePattern: target/access-%i.log
+        archivedFileCount: 10
+        maxFileSize: 10MB
+      - type: console
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: target/root.log
+      archivedLogFilenamePattern: target/root-%i.log
+      archivedFileCount: 10
+      timeZone: IST
+      logFormat: "[%-5level][%date][%X{requestId}][%logger]: %msg%n%rEx{}%n"
+      maxFileSize: 10MB
+    - type: console
+      logFormat: "%date [%X{requestId}] %level [%thread] %logger{10} [%X{id}] %msg%n"

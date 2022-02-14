@@ -1,10 +1,10 @@
 package com.rokt.service;
 
+import com.google.inject.Inject;
 import com.rokt.helpers.DateTimeHelper;
 import com.rokt.model.internal.SearchRequest;
 import com.rokt.model.internal.SearchResponse;
 
-import javax.inject.Inject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +18,6 @@ public class SearchInFileBruteForce implements SearchInFiles{
     private LoadFiles loadFiles;
     @Inject
     private FileParser fileParser;
-
     @Inject
     private DateTimeHelper dateTimeHelper;
 
