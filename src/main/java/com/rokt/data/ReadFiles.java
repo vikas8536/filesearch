@@ -1,4 +1,4 @@
-package com.rokt.service;
+package com.rokt.data;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

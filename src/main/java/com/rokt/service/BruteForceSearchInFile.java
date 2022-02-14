@@ -1,6 +1,7 @@
 package com.rokt.service;
 
 import com.google.inject.Inject;
+import com.rokt.data.ReadFiles;
 import com.rokt.helpers.DateTimeHelper;
 import com.rokt.model.internal.Record;
 import com.rokt.model.internal.SearchRequest;
@@ -10,8 +11,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.*;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @AllArgsConstructor

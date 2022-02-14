@@ -28,8 +28,10 @@ public class BinarySearchInFile extends SearchInFiles {
 
             // move file pointer to midIndex
             raf.seek(midIndex * 4);
-
-            midValue = fileParser.parse(raf.readLine());
+            raf.readLine();
+            String currentLine = raf.readLine();
+            System.out.println("Mid: " + currentLine);
+            midValue = fileParser.parse(currentLine);
 
             if (midValue.getDateTime().isEqual(searchRequest.getFromDateTime())) {
                 break;
@@ -45,14 +47,13 @@ public class BinarySearchInFile extends SearchInFiles {
             return recordList.stream();
         }
 
-        if(midValue.getDateTime().isEqual(searchRequest.getFromDateTime()) || startIndex == endIndex) {
+        if(midValue.getDateTime().isEqual(searchRequest.getFromDateTime()) || startIndex > endIndex) {
             Record record = midValue;
-            recordList.add(record);
-            while(record.getDateTime().isBefore(searchRequest.getToDateTime())
-                    || record.getDateTime().isEqual(searchRequest.getToDateTime())) {
-                record = fileParser.parse(raf.readLine());
+            do {
                 recordList.add(record);
-            }
+                record = fileParser.parse(raf.readLine());
+            } while(record.getDateTime().isBefore(searchRequest.getToDateTime())
+                    || record.getDateTime().isEqual(searchRequest.getToDateTime()));
         }
         return recordList.stream();
     }

@@ -1,13 +1,12 @@
 package com.rokt.service;
 
 import com.google.inject.Inject;
+import com.rokt.data.ReadFiles;
 import com.rokt.helpers.DateTimeHelper;
 import com.rokt.model.internal.Record;
 import com.rokt.model.internal.SearchRequest;
-import com.rokt.model.internal.SearchResponse;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Stream;
 
 public abstract class SearchInFiles {

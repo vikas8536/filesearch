@@ -1,4 +1,4 @@
-package com.rokt.service;
+package com.rokt.data;
 
 import com.rokt.application.FileSearchConfiguration;
 
@@ -12,9 +12,13 @@ public class LoadFilesFromLocal implements ReadFiles {
     @Inject
     FileSearchConfiguration configuration;
 
+    private String getQualifiedName(String fileName) {
+        return configuration.getFilesLocation() + "/" + fileName;
+    }
+
     @Override
     public InputStream readFiles(String fileName) throws FileNotFoundException {
-        String qualifiedFileName = configuration.getFilesLocation() + "/" + fileName;
+        String qualifiedFileName = getQualifiedName(fileName);
         FileInputStream fileInputStream = new FileInputStream(qualifiedFileName);
         return fileInputStream;
     }
@@ -26,7 +30,8 @@ public class LoadFilesFromLocal implements ReadFiles {
 
     @Override
     public RandomAccessFile readFileAsRAF(String fileName) throws FileNotFoundException {
-        return new RandomAccessFile(fileName, "r");
+        String qualifiedFileName = getQualifiedName(fileName);
+        return new RandomAccessFile(qualifiedFileName, "r");
     }
 
     @Override
