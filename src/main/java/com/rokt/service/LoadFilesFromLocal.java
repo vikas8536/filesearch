@@ -15,7 +15,8 @@ public class LoadFilesFromLocal implements ReadFiles {
     @Override
     public InputStream readFiles(String fileName) throws FileNotFoundException {
         String qualifiedFileName = configuration.getFilesLocation() + "/" + fileName;
-        return new FileInputStream(qualifiedFileName);
+        FileInputStream fileInputStream = new FileInputStream(qualifiedFileName);
+        return fileInputStream;
     }
 
     @Override
@@ -25,11 +26,11 @@ public class LoadFilesFromLocal implements ReadFiles {
 
     @Override
     public RandomAccessFile readFileAsRAF(String fileName) throws FileNotFoundException {
-        return null;
+        return new RandomAccessFile(fileName, "r");
     }
 
     @Override
-    public int getSizeOfFile(String fileName) {
-        return 0;
+    public long getSizeOfFile(String fileName) throws IOException {
+        return readFileAsRAF(fileName).length();
     }
 }

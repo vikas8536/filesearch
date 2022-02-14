@@ -54,20 +54,14 @@ public class FileSearchResource {
     @ExceptionMetered(name = "searchInFileException")
     @ApiOperation(value = "Stream search results")
     public Response searchInFile(PostRequest request) {
-        //System.out.println(request);
         List<SearchResponse> searchResponses;
         try {
             SearchRequest searchRequest = requestValidation.validate(request);
-            // Search
             searchResponses = searchInFiles.searchInFile(searchRequest);
-        } catch (IllegalArgumentException e) {
+        } catch (IOException e) {
             return Response
-                    .status(Response.Status.BAD_REQUEST.getStatusCode(),
-                            e.getMessage())
+                    .status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage())
                     .build();
-        }
-        catch (IOException e) {
-            return Response.serverError().entity("File Does Not Exist!").build();
         }
         return Response.ok().entity(searchResponses).build();
     }

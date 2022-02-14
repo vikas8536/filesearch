@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 
 @AllArgsConstructor
 @Getter
-public class FileRecord {
+public class Record {
     DateTime dateTime;
     String email;
     String sessionId;

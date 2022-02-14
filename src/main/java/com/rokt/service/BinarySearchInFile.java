@@ -2,17 +2,15 @@ package com.rokt.service;
 
 import com.google.inject.Inject;
 import com.rokt.helpers.DateTimeHelper;
-import com.rokt.model.internal.FileRecord;
+import com.rokt.model.internal.Record;
 import com.rokt.model.internal.SearchRequest;
 import com.rokt.model.internal.SearchResponse;
 import org.joda.time.DateTime;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.List;
-import java.util.Objects;
 
-public class BinarySearchInFile implements SearchInFiles {
+public class BinarySearchInFile extends SearchInFiles {
     @Inject
     private FileParser fileParser;
     @Inject
@@ -63,7 +61,7 @@ public class BinarySearchInFile implements SearchInFiles {
         }
         return false;
     }*/
-    private boolean isInRange(SearchRequest searchRequest, FileRecord a) {
+    private boolean isInRange(SearchRequest searchRequest, Record a) {
         DateTime recordDateTime = a.getDateTime();
         DateTime fromDateTime = searchRequest.getFromDateTime();
         DateTime toDateTime = searchRequest.getToDateTime();
