@@ -15,8 +15,14 @@
         <mockito.version>4.3.1</mockito.version>
         <swagger.version>2.0.12-1</swagger.version>
         <lombok.version>1.18.22</lombok.version>
+        <jersey.version>2.32</jersey.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

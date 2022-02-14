@@ -1,4 +1,6 @@
 maxConcurrency: "500"
+filesLocation: "src/main/resources/uploadedFiles"
+dateTimeFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'"
 server:
   gzip:
     bufferSize: 350KB
@@ -28,7 +30,7 @@ server:
         maxFileSize: 10MB
       - type: console
 logging:
-  level: DEBUG
+  level: INFO
   appenders:
     - type: file
       currentLogFilename: target/root.log
@@ -39,7 +41,3 @@ logging:
       maxFileSize: 10MB
     - type: console
       logFormat: "%date [%X{requestId}] %level [%thread] %logger{10} [%X{id}] %msg%n"
-swagger:
-  resourcePackage: resource
-
-swaggerBasePath: http://localhost:25934
