@@ -7,8 +7,6 @@ import com.rokt.model.internal.SearchRequest;
 import com.rokt.model.internal.SearchResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.checkerframework.checker.units.qual.N;
-import org.joda.time.DateTime;
 
 import java.io.*;
 import java.util.Comparator;
@@ -22,17 +20,15 @@ public class BruteForceSearchInFile extends SearchInFiles{
     @Inject
     private ReadFiles readFiles;
     @Inject
-    private FileParser fileParser;
+    private RecordParser fileParser;
     @Inject
     private DateTimeHelper dateTimeHelper;
 
     @Override
-    public List<SearchResponse> searchInFile(SearchRequest searchRequest) throws FileNotFoundException {
+    public Stream<Record> searchInFile(SearchRequest searchRequest) throws FileNotFoundException {
         Stream<String> bufferedReaderStream = readFiles.readFileAsStream(searchRequest.getFileName());
         Stream<Record> recordStream = bufferedReaderStream.map(fileParser::parse);
-        Stream<Record> records = searchInStream(recordStream, searchRequest);
-        return records.map(this::convertToSearchResponse)
-                .collect(Collectors.toList());
+        return searchInStream(recordStream, searchRequest);
     }
 
     Stream<Record> searchInStream(Stream<Record> input, SearchRequest searchRequest) {

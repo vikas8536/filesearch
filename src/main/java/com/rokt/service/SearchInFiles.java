@@ -5,20 +5,20 @@ import com.rokt.helpers.DateTimeHelper;
 import com.rokt.model.internal.Record;
 import com.rokt.model.internal.SearchRequest;
 import com.rokt.model.internal.SearchResponse;
-import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Stream;
 
 public abstract class SearchInFiles {
     @Inject
-    private ReadFiles readFiles;
+    protected ReadFiles readFiles;
     @Inject
-    private FileParser fileParser;
+    protected RecordParser fileParser;
     @Inject
-    private DateTimeHelper dateTimeHelper;
+    protected DateTimeHelper dateTimeHelper;
 
-    public abstract List<SearchResponse> searchInFile(SearchRequest searchRequest) throws IOException;
+    public abstract Stream<Record> searchInFile(SearchRequest searchRequest) throws IOException;
 
     protected boolean isInRange(SearchRequest searchRequest, Record a) {
         return !isRecordBeforeSearchRange(searchRequest, a)

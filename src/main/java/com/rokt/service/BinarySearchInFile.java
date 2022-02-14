@@ -1,74 +1,59 @@
 package com.rokt.service;
 
-import com.google.inject.Inject;
-import com.rokt.helpers.DateTimeHelper;
 import com.rokt.model.internal.Record;
 import com.rokt.model.internal.SearchRequest;
-import com.rokt.model.internal.SearchResponse;
-import org.joda.time.DateTime;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class BinarySearchInFile extends SearchInFiles {
-    @Inject
-    private FileParser fileParser;
-    @Inject
-    private DateTimeHelper dateTimeHelper;
     @Override
-    public List<SearchResponse> searchInFile(SearchRequest searchRequest) throws IOException {
-
-        return null;
+    public Stream<Record> searchInFile(SearchRequest searchRequest) throws IOException {
+        RandomAccessFile randomAccessFile = readFiles.readFileAsRAF(searchRequest.getFileName());
+        return binarySearch(randomAccessFile, searchRequest);
     }
-    /*public boolean binarySearch(SearchRequest searchRequest) {
-        String fileName = searchRequest.getFileName();
-        DateTime from = searchRequest.getFromDateTime();
-        DateTime to = searchRequest.getToDateTime();
 
-        try {
-            RandomAccessFile raf = new RandomAccessFile(fileName, "r");
-            String line = raf.readLine();
-            FileRecord record = fileParser.parse(line);
-            DateTime recordDateTime = record.getDateTime();
-            if (isInRange(searchRequest, record))
-                return true;
+    public Stream<Record> binarySearch(RandomAccessFile raf, SearchRequest searchRequest) throws IOException {
+        List<Record> recordList = new ArrayList<>();
 
-            int count = (int) (raf.length() >> 2);
-            int midIndex, midValue, endIndex = count - 1, startIndex = 0;
+        int count = (int) (raf.length() >> 2);
+        int midIndex, endIndex = count - 1, startIndex = 0;
 
-            while (startIndex <= endIndex) {
-                midIndex = (endIndex + startIndex) >> 1;
+        Record midValue = null;
+        while (startIndex <= endIndex) {
+            midIndex = (endIndex + startIndex) >> 1;
 
-                // move file pointer to midIndex
-                raf.seek(midIndex * 4);
+            // move file pointer to midIndex
+            raf.seek(midIndex * 4);
 
-                midValue = raf.readInt();
-                if (midValue == num) {
-                    return true;
+            midValue = fileParser.parse(raf.readLine());
+
+            if (midValue.getDateTime().isEqual(searchRequest.getFromDateTime())) {
+                break;
+            } else {
+                if (midValue.getDateTime().isAfter(searchRequest.getFromDateTime())) {
+                    endIndex = midIndex - 1;
                 } else {
-                    if (midValue > num) {
-                        endIndex = midIndex - 1;
-                    } else {
-                        startIndex = midIndex + 1;
-                    }
+                    startIndex = midIndex + 1;
                 }
             }
-            raf.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return false;
-    }*/
-    private boolean isInRange(SearchRequest searchRequest, Record a) {
-        DateTime recordDateTime = a.getDateTime();
-        DateTime fromDateTime = searchRequest.getFromDateTime();
-        DateTime toDateTime = searchRequest.getToDateTime();
-        return (recordDateTime.isAfter(fromDateTime)
-                || recordDateTime.isEqual(toDateTime))
-                &&
-                (a.getDateTime().isBefore(searchRequest.getToDateTime())
-                        ||a.getDateTime().isEqual(searchRequest.getToDateTime()));
+        if(midValue == null) {
+            return recordList.stream();
+        }
+
+        if(midValue.getDateTime().isEqual(searchRequest.getFromDateTime()) || startIndex == endIndex) {
+            Record record = midValue;
+            recordList.add(record);
+            while(record.getDateTime().isBefore(searchRequest.getToDateTime())
+                    || record.getDateTime().isEqual(searchRequest.getToDateTime())) {
+                record = fileParser.parse(raf.readLine());
+                recordList.add(record);
+            }
+        }
+        return recordList.stream();
     }
 }

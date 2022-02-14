@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class SpaceSeparatedFileParser implements FileParser{
+public class SpaceSeparatedFileParser implements RecordParser {
 
     @Inject
     private DateTimeHelper dateTimeHelper;

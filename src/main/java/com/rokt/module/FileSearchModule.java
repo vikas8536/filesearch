@@ -6,7 +6,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import com.rokt.application.FileSearchConfiguration;
 import com.rokt.helpers.DateTimeHelper;
-import com.rokt.helpers.RequestValidation;
+import com.rokt.helpers.RequestParser;
+import com.rokt.helpers.ResponseParser;
 import com.rokt.service.*;
 
 public class FileSearchModule extends AbstractModule {
@@ -25,11 +26,12 @@ public class FileSearchModule extends AbstractModule {
         bind(MetricRegistry.class).toInstance(registry);
 
         bind(ReadFiles.class).toInstance(new LoadFilesFromLocal());
-        bind(FileParser.class).toInstance(new SpaceSeparatedFileParser());
-        bind(SearchInFiles.class).toInstance(new BruteForceSearchInFile());
+        bind(RecordParser.class).toInstance(new SpaceSeparatedFileParser());
+        bind(SearchInFiles.class).toInstance(new BinarySearchInFile());
 
         bind(DateTimeHelper.class).asEagerSingleton();
-        bind(RequestValidation.class).asEagerSingleton();
+        bind(RequestParser.class).asEagerSingleton();
+        bind(ResponseParser.class).asEagerSingleton();
 
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectMapper defaultTypingObjectMapper = new ObjectMapper();

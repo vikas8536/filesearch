@@ -1,5 +1,5 @@
 maxConcurrency: "500"
-filesLocation: "src/main/resources/uploadedFiles"
+filesLocation: "uploadedFiles"
 dateTimeFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'"
 server:
   gzip:

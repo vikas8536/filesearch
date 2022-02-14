@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestValidation {
+public class RequestParser {
     @Inject
     private DateTimeHelper dateTimeHelper;
 
