@@ -57,7 +57,7 @@ public class FileSearchResource {
         //System.out.println(request);
         List<SearchResponse> searchResponses;
         try {
-            SearchRequest searchRequest = requestValidation.validateAndParsePostRequest(request);
+            SearchRequest searchRequest = requestValidation.validate(request);
             // Search
             searchResponses = searchInFiles.searchInFile(searchRequest);
         } catch (IllegalArgumentException e) {

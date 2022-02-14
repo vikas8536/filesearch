@@ -1,12 +1,15 @@
 package com.rokt.helpers;
 
 import com.rokt.application.FileSearchConfiguration;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import javax.inject.Inject;
 
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class DateTimeHelper {
 
     @Inject

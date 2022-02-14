@@ -3,12 +3,11 @@ package com.rokt.service;
 import com.rokt.application.FileSearchConfiguration;
 
 import javax.inject.Inject;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.stream.Stream;
 
 
-public class LoadFilesFromLocal implements LoadFiles{
+public class LoadFilesFromLocal implements ReadFiles {
 
     @Inject
     FileSearchConfiguration configuration;
@@ -17,6 +16,16 @@ public class LoadFilesFromLocal implements LoadFiles{
     public InputStream readFiles(String fileName) throws FileNotFoundException {
         String qualifiedFileName = configuration.getFilesLocation() + "/" + fileName;
         return new FileInputStream(qualifiedFileName);
+    }
+
+    @Override
+    public Stream<String> readFileAsStream(String fileName) throws FileNotFoundException {
+        return new BufferedReader(new InputStreamReader(readFiles(fileName))).lines();
+    }
+
+    @Override
+    public RandomAccessFile readFileAsRAF(String fileName) throws FileNotFoundException {
+        return null;
     }
 
     @Override

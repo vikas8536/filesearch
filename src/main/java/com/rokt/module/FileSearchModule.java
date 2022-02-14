@@ -24,7 +24,7 @@ public class FileSearchModule extends AbstractModule {
         bind(FileSearchConfiguration.class).toInstance(fileSearchConfiguration);
         bind(MetricRegistry.class).toInstance(registry);
 
-        bind(LoadFiles.class).toInstance(new LoadFilesFromLocal());
+        bind(ReadFiles.class).toInstance(new LoadFilesFromLocal());
         bind(FileParser.class).toInstance(new SpaceSeparatedFileParser());
         bind(SearchInFiles.class).toInstance(new SearchInFileBruteForce());
 
