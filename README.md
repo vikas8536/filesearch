@@ -30,8 +30,28 @@ Output: Parsed entries within the date time range inclusively, in JSON format. E
 Using filesystem as database and filesystem can be mounted in docker container.
 
 # EXECUTE
-export DATA_PATH=/path/to/data/filesDir
-
+To build Docker Image:
+```
 bash build.sh
+```
 
+Before we run the service we can provide the directory to the files. If not it defaults to "uploadedFiles"
+```
+export DATA_PATH=/path/to/data/filesDir
+```
+Run the service:
+```
 bash run.sh
+```
+
+
+Test:
+```
+curl --location --request POST 'localhost:9090' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "filename": "sample1.txt",
+    "from": "2000-01-05T11:10:00Z",
+    "to": "2000-01-09T05:05:59Z"
+}'
+```
