@@ -11,9 +11,9 @@ import com.rokt.helpers.DateTimeHelper;
 import com.rokt.helpers.RequestParser;
 import com.rokt.helpers.ResponseParser;
 import com.rokt.service.BinarySearchInFile;
-import com.rokt.service.RecordParser;
+import com.rokt.helpers.RecordParser;
 import com.rokt.service.SearchInFiles;
-import com.rokt.service.SpaceSeparatedFileParser;
+import com.rokt.helpers.SpaceSeparatedFileParser;
 
 public class FileSearchModule extends AbstractModule {
 

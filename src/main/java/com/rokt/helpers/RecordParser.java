@@ -1,4 +1,4 @@
-package com.rokt.service;
+package com.rokt.helpers;
 
 import com.rokt.model.internal.Record;
 

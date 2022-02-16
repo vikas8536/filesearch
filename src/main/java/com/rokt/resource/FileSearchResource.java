@@ -3,6 +3,7 @@ package com.rokt.resource;
 import com.codahale.metrics.annotation.ExceptionMetered;
 import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
+import com.rokt.exception.FileSearchRuntimeException;
 import com.rokt.helpers.RequestParser;
 import com.rokt.helpers.ResponseParser;
 import com.rokt.model.api.PostRequest;
@@ -63,7 +64,7 @@ public class FileSearchResource {
             searchResponses = recordStream
                     .map(responseParser::convertToSearchResponse)
                     .collect(Collectors.toList());
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | FileSearchRuntimeException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage())
                     .build();

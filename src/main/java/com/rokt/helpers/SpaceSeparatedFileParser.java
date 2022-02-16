@@ -1,9 +1,10 @@
-package com.rokt.service;
+package com.rokt.helpers;
 
-import com.rokt.helpers.DateTimeHelper;
+import com.rokt.exception.RecordFormatException;
 import com.rokt.model.internal.Record;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 
@@ -18,8 +19,9 @@ public class SpaceSeparatedFileParser implements RecordParser {
     public Record parse(String input) {
         String[] s = input.split(" ");
         if(s.length == 3) {
-            return new Record(dateTimeHelper.convert(s[0]), s[1], s[2]);
+            DateTime dateTime = dateTimeHelper.convert(s[0]);
+            return new Record(dateTime, s[1], s[2]);
         }
-        return null;
+        throw new RecordFormatException("Error in parsing record from file!");
     }
 }

@@ -16,7 +16,8 @@ public class DateTimeHelper {
     FileSearchConfiguration configuration;
 
     public DateTime convert(String dateTime) {
-       return DateTime.parse(dateTime, DateTimeFormat.forPattern(configuration.getDateTimeFormat()));
+       return DateTime.parse(dateTime,
+               DateTimeFormat.forPattern(configuration.getDateTimeFormat()));
     }
 
     public String convert(DateTime dateTime) {

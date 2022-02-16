@@ -1,12 +1,16 @@
 package com.rokt.data;
 
 import com.rokt.application.FileSearchConfiguration;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.inject.Inject;
 import java.io.*;
 import java.util.stream.Stream;
 
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoadFilesFromLocal implements ReadFiles {
 
     @Inject

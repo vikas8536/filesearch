@@ -1,7 +1,5 @@
 package com.rokt.service;
 
-import com.google.inject.Inject;
-import com.rokt.data.ReadFiles;
 import com.rokt.model.internal.Record;
 import com.rokt.model.internal.SearchRequest;
 
@@ -9,10 +7,6 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public abstract class SearchInFiles {
-    @Inject
-    protected ReadFiles readFiles;
-    @Inject
-    protected RecordParser fileParser;
 
     public abstract Stream<Record> searchInFile(SearchRequest searchRequest) throws IOException;
 

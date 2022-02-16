@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class BruteForceSearchInFileTest {
-    BruteForceSearchInFile searchInFile;
+public class BinarySearchInFileTest {
+    BinarySearchInFile searchInFile;
     String format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     @Before
     public void setUp() {
         ReadFiles readFiles = TestUtils.getReadFiles();
         RecordParser recordParser = TestUtils.getRecordParser(format);
-        searchInFile = new BruteForceSearchInFile(readFiles, recordParser);
+        searchInFile = new BinarySearchInFile(readFiles, recordParser);
     }
 
     @Test
