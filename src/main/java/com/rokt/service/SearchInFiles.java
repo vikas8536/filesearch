@@ -2,7 +2,6 @@ package com.rokt.service;
 
 import com.google.inject.Inject;
 import com.rokt.data.ReadFiles;
-import com.rokt.helpers.DateTimeHelper;
 import com.rokt.model.internal.Record;
 import com.rokt.model.internal.SearchRequest;
 
@@ -14,8 +13,6 @@ public abstract class SearchInFiles {
     protected ReadFiles readFiles;
     @Inject
     protected RecordParser fileParser;
-    @Inject
-    protected DateTimeHelper dateTimeHelper;
 
     public abstract Stream<Record> searchInFile(SearchRequest searchRequest) throws IOException;
 
@@ -24,11 +21,11 @@ public abstract class SearchInFiles {
                 && !isRecordAfterSearchRange(searchRequest, a);
     }
 
-    private boolean isRecordBeforeSearchRange(SearchRequest searchRequest, Record record) {
+    protected boolean isRecordBeforeSearchRange(SearchRequest searchRequest, Record record) {
         return record.getDateTime().isBefore(searchRequest.getFromDateTime());
     }
 
-    private boolean isRecordAfterSearchRange(SearchRequest searchRequest, Record record) {
+    protected boolean isRecordAfterSearchRange(SearchRequest searchRequest, Record record) {
         return record.getDateTime().isAfter(searchRequest.getToDateTime());
     }
 }

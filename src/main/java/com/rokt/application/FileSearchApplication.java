@@ -10,7 +10,6 @@ import com.rokt.module.FileSearchModule;
 import com.rokt.resource.FileSearchResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
-import org.glassfish.jersey.server.ServerProperties;
 
 public class FileSearchApplication extends Application<FileSearchConfiguration> {
     public static void main(String[] args) throws Exception {
